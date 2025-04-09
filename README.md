@@ -42,7 +42,7 @@ Node.js 18+ e npm (para desenvolvimento frontend)
 
 bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/mvfiscal-tasks.git
+git clone https://github.com/moisesoliveira01/mv-fiscal.git
 
 # 2. Inicie todos os serviços (backend, frontend e PostgreSQL)
 docker-compose up -d --build
