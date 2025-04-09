@@ -6,6 +6,7 @@
 Sistema para gerenciamento de tarefas, com: 
 
 ✔ Backend em Java 17 + Spring Boot  
+✔ Microsserviços  
 ✔ Frontend em Angular 19 + PrimeNG  
 ✔ Banco de dados PostgreSQL  
 ✔ Docker Compose para fácil execução  
@@ -33,8 +34,8 @@ TypeScript
 ## Pré-requisitos 
 
 Docker e Docker Compose instalados  
-Java 17 (para desenvolvimento backend)  
-Node.js 18+ e npm (para desenvolvimento frontend)  
+Java 17 (para os microsserviços)  
+Node.js 18+ e npm (para o frontend)  
 
 ## 1️⃣ Opção 1: Execução com Docker Compose
 
@@ -52,10 +53,14 @@ docker-compose up -d --build
 
 ## Backend
 
-cd mv-fiscal-back
- 
-1. Execute o projeto com Gradle  
+cd mv-fiscal-back  
 
+1. Execute os dois microsserviços:  
+
+cd userservice  
+./gradlew bootRun
+
+cd taskservice   
 ./gradlew bootRun
 
 ## Frontend
