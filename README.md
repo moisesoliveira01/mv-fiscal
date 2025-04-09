@@ -52,7 +52,7 @@ docker-compose up -d --build
 
 ## Backend
 
-cd backend
+cd mv-fiscal-back
 
 1. Configure o banco de dados (edite application.yml)  
 2. Execute o projeto com Gradle  
@@ -61,7 +61,7 @@ cd backend
 
 ## Frontend
 
-cd frontend
+cd mv-fiscal-front
 
 1. Instale as dependências  
 npm install
