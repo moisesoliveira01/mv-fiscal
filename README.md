@@ -44,7 +44,7 @@ git clone https://github.com/moisesoliveira01/mv-fiscal.git
 2. Inicie todos os serviços (backend, frontend e PostgreSQL)  
 docker-compose up -d --build
 
-3. Acesse:
+3. Acesse:  
 → Frontend: http://localhost:4200  
 → PostgreSQL: porta 5432  
 
@@ -53,9 +53,8 @@ docker-compose up -d --build
 ## Backend
 
 cd mv-fiscal-back
-
-1. Configure o banco de dados (edite application.yml)  
-2. Execute o projeto com Gradle  
+ 
+1. Execute o projeto com Gradle  
 
 ./gradlew bootRun
 
