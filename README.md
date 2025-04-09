@@ -1,0 +1,72 @@
+MVFISCAL - Sistema de Gerenciamento de Tarefas
+📌 Visão Geral
+Sistema completo para gerenciamento de tarefas, com:
+✔ Backend em Java 17 + Spring Boot
+✔ Frontend em Angular 19 + PrimeNG
+✔ Banco de dados PostgreSQL
+✔ Docker Compose para fácil execução
+
+⚙ Tecnologias Utilizadas
+Backend
+Java 17
+
+Spring Boot (REST API)
+
+Gradle (gerenciamento de dependências)
+
+Hibernate/JPA (ORM para PostgreSQL)
+
+PostgreSQL (banco de dados)
+
+Frontend
+Angular 19.2.6
+
+PrimeNG (UI Components)
+
+RxJS (programação reativa)
+
+TypeScript
+
+🚀 Como Executar o Projeto
+Pré-requisitos
+Docker e Docker Compose instalados
+
+Java 17 (para desenvolvimento backend)
+
+Node.js 18+ e npm (para desenvolvimento frontend)
+
+1️⃣ Opção 1: Execução com Docker Compose
+
+bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/mvfiscal-tasks.git
+
+# 2. Inicie todos os serviços (backend, frontend e PostgreSQL)
+docker-compose up -d --build
+
+# 3. Acesse:
+#    → Frontend: http://localhost:4200
+#    → PostgreSQL: porta 5432
+
+2️⃣ Opção 2: Execução Manual
+Backend (Spring Boot)
+
+bash
+cd backend
+
+# 1. Configure o banco de dados (edite application.yml)
+# 2. Execute o projeto com Gradle
+./gradlew bootRun
+
+# API estará disponível em → http://localhost:8080
+# Swagger UI → http://localhost:8080/swagger-ui.html
+Frontend (Angular)
+
+bash
+cd frontend
+
+# 1. Instale as dependências
+npm install
+
+# 2. Inicie o servidor de desenvolvimento
+ng serve
