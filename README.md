@@ -1,4 +1,5 @@
 MVFISCAL - Sistema de Gerenciamento de Tarefas
+
 📌 Visão Geral
 Sistema completo para gerenciamento de tarefas, com:
 ✔ Backend em Java 17 + Spring Boot
@@ -17,6 +18,8 @@ Gradle (gerenciamento de dependências)
 Hibernate/JPA (ORM para PostgreSQL)
 
 PostgreSQL (banco de dados)
+
+Swagger
 
 Frontend
 Angular 19.2.6
@@ -58,8 +61,6 @@ cd backend
 # 2. Execute o projeto com Gradle
 ./gradlew bootRun
 
-# API estará disponível em → http://localhost:8080
-# Swagger UI → http://localhost:8080/swagger-ui.html
 Frontend (Angular)
 
 bash
