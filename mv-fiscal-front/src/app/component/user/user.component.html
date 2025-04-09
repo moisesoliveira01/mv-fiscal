@@ -1,0 +1,133 @@
+<div class="page-container">
+  <h1>Gerenciamento de Usuários</h1>
+
+  <div class="search-toggle">
+    <label>
+      <input
+        type="checkbox"
+        [ngModel]="searchMode"
+        (ngModelChange)="onToggleSearchMode($event)"
+        name="searchMode"
+      />
+      Modo de Pesquisa
+    </label>
+  </div>
+
+  <form
+    #userForm="ngForm"
+    (ngSubmit)="onSubmit(userForm)"
+    (reset)="onClearForm()"
+  >
+    <div class="form-row">
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input
+          type="number"
+          id="id"
+          name="id"
+          ngModel
+          [readonly]="!searchMode"
+          min="1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" ngModel required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" ngModel required email />
+      </div>
+
+      <div class="form-group">
+        <label for="createdDate">Data de Criação:</label>
+        <input
+          type="datetime-local"
+          id="createdDate"
+          name="createdDate"
+          ngModel
+          [readonly]="!searchMode"
+        />
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button
+        type="submit"
+        [disabled]="!userForm.valid || searchMode"
+        title="Salvar"
+      >
+        <i class="pi pi-save"></i>
+      </button>
+
+      <button type="reset" title="Limpar">
+        <i class="pi pi-eraser"></i>
+      </button>
+
+      <button type="button" (click)="onSearch(userForm)" title="Pesquisar">
+        <i class="pi pi-search"></i>
+      </button>
+    </div>
+  </form>
+
+  <div class="grid-container">
+    <ng-container *ngIf="users.length > 0; else emptyMessage">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Criação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.createdDate | date : "dd-MM-yyyy HH:mm" }}</td>
+            <td>
+              <button
+                type="button"
+                class="action-btn edit"
+                (click)="onEdit(user)"
+                title="Editar"
+              >
+                <i class="pi pi-pencil"></i>
+              </button>
+
+              <button
+                type="button"
+                class="action-btn delete"
+                (click)="onDelete(user.id)"
+                title="Excluir"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p-paginator
+        [rows]="pageSize"
+        [totalRecords]="totalUsers"
+        [first]="currentPage * pageSize"
+        (onPageChange)="onPageChange($event)"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Página {currentPage} de {totalPages}"
+      >
+      </p-paginator>
+    </ng-container>
+
+    <ng-template #emptyMessage>
+      <p class="no-data-message">Utilize os campos para pesquisar usuários</p>
+    </ng-template>
+  </div>
+</div>

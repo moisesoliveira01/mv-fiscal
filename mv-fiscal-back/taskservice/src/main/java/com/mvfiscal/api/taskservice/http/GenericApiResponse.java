@@ -1,0 +1,13 @@
+package com.mvfiscal.api.taskservice.http;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public abstract class GenericApiResponse<T> {
+
+    protected String message;
+    protected T responseBody;
+}
+

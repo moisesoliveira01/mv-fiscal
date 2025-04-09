@@ -1,0 +1,23 @@
+<div class="page-container">
+  <h1>Gerenciamento de Usuários e Tarefas</h1>
+
+  <div class="menu-container">
+    <p-card header="Usuários" [routerLink]="'/user'">
+      <ng-template pTemplate="header">
+        <i class="pi pi-user card-icon"></i>
+      </ng-template>
+      <ng-template pTemplate="content">
+        <p class="card-text">Cadastre e gerencie usuários</p>
+      </ng-template>
+    </p-card>
+
+    <p-card header="Tarefas" [routerLink]="'/task'">
+      <ng-template pTemplate="header">
+        <i class="pi pi-check-square card-icon"></i>
+      </ng-template>
+      <ng-template pTemplate="content">
+        <p class="card-text">Cadastre uma tarefa e a atribua a um usuário</p>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

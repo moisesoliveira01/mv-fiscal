@@ -1,0 +1,196 @@
+<div class="page-container">
+  <h1>Gerenciamento de Tarefas</h1>
+
+  <div class="search-toggle">
+    <label>
+      <input
+        type="checkbox"
+        [ngModel]="searchMode"
+        (ngModelChange)="onToggleSearchMode($event)"
+        name="searchMode"
+      />
+      Modo de Pesquisa
+    </label>
+  </div>
+
+  <form
+    #taskForm="ngForm"
+    (ngSubmit)="onSubmit(taskForm)"
+    (reset)="onClearForm()"
+  >
+    <div class="form-row">
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input
+          type="number"
+          id="id"
+          name="id"
+          ngModel
+          [readonly]="!searchMode"
+          min="1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Título</label>
+        <input type="text" id="title" name="title" ngModel required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Descrição</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          ngModel
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select
+          id="status"
+          name="status"
+          ngModel
+          [disabled]="!searchMode && !isEditMode"
+        >
+          <option value="" disabled selected></option>
+          <option value="P">Pendente</option>
+          <option value="A">Em andamento</option>
+          <option value="C">Concluída</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="createdDate">Data de Criação:</label>
+        <input
+          type="datetime-local"
+          id="createdDate"
+          name="createdDate"
+          ngModel
+          [readonly]="!searchMode"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="limitDate">Data Limite:</label>
+        <input type="datetime-local" id="limitDate" name="limitDate" ngModel />
+      </div>
+
+      <div class="form-group">
+        <label for="userId">Usuário</label>
+        <select id="userId" name="userId" [(ngModel)]="selectedUserId" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let user of users" [value]="user.id">
+            {{ user.id }}
+            :
+            {{ user.name }}
+          </option>
+        </select>
+        <div class="pagination-controls">
+          <button
+            type="button"
+            (click)="onUserPageChange('prev')"
+            [disabled]="userPage === 0"
+          >
+            ◀
+          </button>
+          <span>Página {{ userPage + 1 }}</span>
+          <button
+            type="button"
+            (click)="onUserPageChange('next')"
+            [disabled]="
+              (userPage + 1) * userPageSize >= totalUsers && userPage !== 0
+            "
+          >
+            ▶
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button
+        type="submit"
+        [disabled]="!taskForm.valid || searchMode"
+        title="Salvar"
+      >
+        <i class="pi pi-save"></i>
+      </button>
+
+      <button type="reset" title="Limpar">
+        <i class="pi pi-eraser"></i>
+      </button>
+
+      <button type="button" (click)="onSearch(taskForm)" title="Pesquisar">
+        <i class="pi pi-search"></i>
+      </button>
+    </div>
+  </form>
+
+  <div class="grid-container">
+    <ng-container *ngIf="tasks.length > 0; else emptyMessage">
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Data de Criação</th>
+            <th>Data Limite</th>
+            <th>ID do Usuário</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.createdDate | date : "dd-MM-yyyy HH:mm" }}</td>
+            <td>{{ task.limitDate | date : "dd-MM-yyyy HH:mm" }}</td>
+            <td>{{ task.userId }}</td>
+            <td>
+              <button
+                type="button"
+                class="action-btn edit"
+                (click)="onEdit(task)"
+                title="Editar"
+              >
+                <i class="pi pi-pencil"></i>
+              </button>
+
+              <button
+                type="button"
+                class="action-btn delete"
+                (click)="onDelete(task.id)"
+                title="Excluir"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p-paginator
+        [rows]="pageSize"
+        [totalRecords]="totalTasks"
+        [first]="currentPage * pageSize"
+        (onPageChange)="onPageChange($event)"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Página {currentPage} de {totalPages}"
+      >
+      </p-paginator>
+    </ng-container>
+
+    <ng-template #emptyMessage>
+      <p class="no-data-message">Utilize os campos para pesquisar tarefas</p>
+    </ng-template>
+  </div>
+</div>

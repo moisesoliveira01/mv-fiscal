@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: servico-usuario
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mvfiscal
+    username: admin
+    password: 31560466
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        cache:
+          use_second_level_cache: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    main:
+      allow-bean-definition-overriding: true
+    devtools:
+      restart:
+        enabled: true
+      livereload:
+        enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  jackson:
+    time-zone: America/Sao_Paulo
+server:
+  port: 9092
+  servlet:
+    context-path: /${spring.application.name}
+mvfiscal:
+  api:
+    taskservice:
+      url: http://localhost:9093/servico-tarefa
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE

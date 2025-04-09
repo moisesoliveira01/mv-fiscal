@@ -1,0 +1,12 @@
+<ul class="menu-list">
+  <p class="menu-title">MV FISCAL</p>
+  <li
+    *ngFor="let item of menuItems"
+    (click)="onMenuItemClick(item.routerLink)"
+    class="menu-item"
+    [class.active]="item.routerLink === activeMenuItem"
+  >
+    <i [class]="item.icon"></i>
+    <span>{{ item.label }}</span>
+  </li>
+</ul>
