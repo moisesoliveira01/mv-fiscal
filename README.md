@@ -8,7 +8,9 @@ Sistema completo para gerenciamento de tarefas, com:
 ✔ Docker Compose para fácil execução
 
 ⚙ Tecnologias Utilizadas
+
 Backend
+
 Java 17
 
 Spring Boot (REST API)
