@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: mvfiscal-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 31560466
+      POSTGRES_DB: mvfiscal
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mvfiscal-network
+
+  userservice:
+    build: ./mv-fiscal-back/userservice
+    container_name: userservice
+    ports:
+      - "9092:9092"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mvfiscal
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=31560466
+    depends_on:
+      - db
+    networks:
+      - mvfiscal-network
+
+  taskservice:
+    build: ./mv-fiscal-back/taskservice
+    container_name: taskservice
+    ports:
+      - "9093:9093"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mvfiscal
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=31560466
+    depends_on:
+      - db
+    networks:
+      - mvfiscal-network
+
+  frontend:
+    build: ./mv-fiscal-front
+    container_name: mvfiscal-front
+    ports:
+      - "4200:4200"
+    depends_on:
+      - userservice
+      - taskservice
+    networks:
+      - mvfiscal-network
+
+volumes:
+  postgres_data:
+
+networks:
+  mvfiscal-network:
+    driver: bridge
