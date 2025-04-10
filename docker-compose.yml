@@ -47,7 +47,7 @@ services:
     build: ./mv-fiscal-front
     container_name: mvfiscal-front
     ports:
-      - "4200:4200"
+      - "4200:80"
     depends_on:
       - userservice
       - taskservice

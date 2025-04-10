@@ -4,10 +4,11 @@ spring:
   application:
     name: servico-usuario
   datasource:
-    url: jdbc:postgresql://localhost:5432/mvfiscal
+    url: jdbc:postgresql://db:5432/mvfiscal
     username: admin
     password: 31560466
     driver-class-name: org.postgresql.Driver
+    initialize: false
   jpa:
     hibernate:
       ddl-auto: update
@@ -41,7 +42,7 @@ server:
 mvfiscal:
   api:
     taskservice:
-      url: http://localhost:9093/servico-tarefa
+      url: http://taskservice:9093/servico-tarefa
 logging:
   level:
     org.hibernate.SQL: DEBUG
